@@ -17,6 +17,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,10 +25,12 @@ import org.example.client.CAClient;
 import org.example.client.ChannelClient;
 import org.example.client.FabricClient;
 import org.example.config.Config;
+import org.example.user.SampleUser;
 import org.example.user.UserContext;
 import org.example.util.Util;
 import org.hyperledger.fabric.sdk.ChaincodeID;
 import org.hyperledger.fabric.sdk.ChaincodeResponse.Status;
+
 import org.hyperledger.fabric.sdk.Channel;
 import org.hyperledger.fabric.sdk.EventHub;
 import org.hyperledger.fabric.sdk.Orderer;
@@ -45,7 +48,9 @@ public class InvokeChaincode {
 
 	private static final byte[] EXPECTED_EVENT_DATA = "!".getBytes(UTF_8);
 	private static final String EXPECTED_EVENT_NAME = "event";
-
+	private static SampleUser Adminorg1=new SampleUser("peer","Admin","Org1MSP");
+	private static SampleUser User1org1=new SampleUser("peer","User1","Org1MSP");
+    
 	public static void main(String args[]) {
 		try {
             Util.cleanUp();
@@ -74,8 +79,10 @@ public class InvokeChaincode {
 			TransactionProposalRequest request = fabClient.getInstance().newTransactionProposalRequest();
 			ChaincodeID ccid = ChaincodeID.newBuilder().setName(Config.CHAINCODE_1_NAME).build();
 			request.setChaincodeID(ccid);
-			request.setFcn("createCar");
-			String[] arguments = { "CAR1", "Chevy", "Volt", "Red", "Nick" };
+			request.setFcn("create");
+			
+			String uuid = UUID.randomUUID()+"";
+			String[] arguments = {uuid};
 			request.setArgs(arguments);
 			request.setProposalWaitTime(1000);
 
