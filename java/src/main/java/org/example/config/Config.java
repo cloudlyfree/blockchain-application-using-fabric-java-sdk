@@ -4,7 +4,7 @@ import java.io.File;
 
 public class Config {
 	
-	public static final String ORG1_MSP = "BankMSP";
+	public static final String ORG1_MSP = "TrafficMSP";
 
 	public static final String ORG1 = "TrafficMSP";
 
@@ -32,23 +32,23 @@ public class Config {
 	public static final String ORG2_USR_ADMIN_PK = ORG2_USR_BASE_PATH + File.separator + "keystore";
 	public static final String ORG2_USR_ADMIN_CERT = ORG2_USR_BASE_PATH + File.separator + "admincerts";
 	
-	public static final String CA_ORG1_URL = "http://192.168.0.90:7054";
+	public static final String CA_ORG1_URL = "https://ca.traffic.notax.com:7054";
 	
 	public static final String CA_ORG2_URL = "http://localhost:8054";
 	
-	public static final String ORDERER_URL = "grpc://192.168.0.90:7050";
+	public static final String ORDERER_URL = "grpcs://192.168.0.90:7050";
 	
 	public static final String ORDERER_NAME = "orderer0.notax.com";
 	
 	public static final String CHANNEL_NAME = "finnotax";
 	
-	public static final String ORG1_PEER_0 = "peer0.bank.notax.com";
+	public static final String ORG1_PEER_0 = "peer0.traffic.notax.com";
 	
-	public static final String ORG1_PEER_0_URL = "grpc://192.168.0.93:7051";
+	public static final String ORG1_PEER_0_URL = "grpcs://192.168.0.90:7051";
 	
-	public static final String ORG1_PEER_1 = "peer1.org1.example.com";
+	public static final String ORG1_PEER_1 = "peer1.traffic.notax.com";
 	
-	public static final String ORG1_PEER_1_URL = "grpc://localhost:7056";
+	public static final String ORG1_PEER_1_URL = "grpc://192.168.0.91:7051";
 	
     public static final String ORG2_PEER_0 = "peer0.org2.example.com";
 	
@@ -60,7 +60,7 @@ public class Config {
 	
 	public static final String CHAINCODE_ROOT_DIR = "chaincode";
 	
-	public static final String CHAINCODE_1_NAME = "trafficcc";
+	public static final String CHAINCODE_1_NAME = "traffic1";
 	
 	public static final String CHAINCODE_1_PATH = "github.com/fabcar";
 	

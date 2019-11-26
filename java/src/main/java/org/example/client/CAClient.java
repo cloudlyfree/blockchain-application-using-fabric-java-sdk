@@ -18,12 +18,14 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.example.config.Config;
 import org.example.user.UserContext;
 import org.example.util.Util;
 import org.hyperledger.fabric.sdk.Enrollment;
 import org.hyperledger.fabric.sdk.exception.CryptoException;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
 import org.hyperledger.fabric.sdk.security.CryptoSuite;
+import org.hyperledger.fabric_ca.sdk.EnrollmentRequest;
 import org.hyperledger.fabric_ca.sdk.HFCAClient;
 import org.hyperledger.fabric_ca.sdk.RegistrationRequest;
 
@@ -100,7 +102,10 @@ public class CAClient {
 			Logger.getLogger(CAClient.class.getName()).log(Level.WARNING, "CA -" + caUrl + " admin is already enrolled.");
 			return userContext;
 		}
-		Enrollment adminEnrollment = instance.enroll(username, password);
+		EnrollmentRequest enrollmentRequestTLS  = new EnrollmentRequest();
+ 		enrollmentRequestTLS.addHost(Config.CA_ORG1_URL);
+ 		enrollmentRequestTLS.setProfile("tls");
+		Enrollment adminEnrollment = instance.enroll(username, password,enrollmentRequestTLS);
 		adminContext.setEnrollment(adminEnrollment);
 		Logger.getLogger(CAClient.class.getName()).log(Level.INFO, "CA -" + caUrl + " Enrolled Admin.");
 		Util.writeUserContext(adminContext);
